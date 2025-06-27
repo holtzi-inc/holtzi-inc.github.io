@@ -25,7 +25,7 @@ const translations = {
     
     // Services Section
     'services-title': 'ÇÖZÜMLERİMİZ',
-    'services-subtitle': 'Deneyimli ekibimizle işinizi erişilebilirliğin geleceğine taşıyoruz. Deneyimli kadromuzla işinizi geleceğe taşıyoruz.',
+    'services-subtitle': 'Deneyimli ekibimizle işinizi erişilebilirliğin geleceğine taşıyoruz.',
     'service1-title': 'İletişim Bariyerlerini Ortadan Kaldırır',
     'service1-text': 'Konuşmayı işaret diline, işaret dilini de konuşmaya yapay zeka desteğiyle yüksek başarımla çevirerek engelli bireyler ile işaret dili bilmeyen kişiler arasında köprü görevi görür.',
     'service2-title': 'Kolay Kurulum, Kolay Kullanım',
