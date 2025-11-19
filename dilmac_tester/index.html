@@ -171,7 +171,7 @@
             justify-content: space-between;
             align-items: center;
             gap: 20px;
-            margin-top: 30px;
+            margin-bottom: 30px;
         }
 
         .nav-btn {
@@ -414,6 +414,18 @@
     <main>
         <div class="container">
             <div class="showcase-container">
+                <div class="navigation">
+                    <button class="nav-btn" id="prevBtn" aria-label="Önceki video">
+                        ← Önceki
+                    </button>
+                    <div class="progress-indicator" id="progressIndicator">
+                        1 / 11
+                    </div>
+                    <button class="nav-btn" id="nextBtn" aria-label="Sonraki video">
+                        Sonraki →
+                    </button>
+                </div>
+
                 <div class="sentence-container">
                     <h3 class="section-title">Türkçe havaalanı duyurusu</h3>
                     <div class="sentence-text" id="sentenceText">Yükleniyor...</div>
@@ -438,18 +450,6 @@
                         </button>
                     </div>
                 </div>
-                </div>
-
-                <div class="navigation">
-                    <button class="nav-btn" id="prevBtn" aria-label="Önceki video">
-                        ← Önceki
-                    </button>
-                    <div class="progress-indicator" id="progressIndicator">
-                        1 / 11
-                    </div>
-                    <button class="nav-btn" id="nextBtn" aria-label="Sonraki video">
-                        Sonraki →
-                    </button>
                 </div>
             </div>
         </div>
@@ -486,6 +486,14 @@
         function showContent() {
             document.getElementById('loginContainer').style.display = 'none';
             document.getElementById('protectedContent').classList.add('authenticated');
+
+            // Give the DOM time to render, then try to play the video
+            setTimeout(() => {
+                const video = document.getElementById('videoPlayer');
+                if (video && video.readyState >= 3) {
+                    video.play().catch(() => {});
+                }
+            }, 100);
         }
 
         // Handle login
@@ -570,11 +578,10 @@
             videoPlayer.load();
             updateProgress();
 
-            // Auto-play video
-            videoPlayer.play().catch(err => {
-                // Autoplay may be blocked by browser - silently handle
-                console.log('Autoplay prevented:', err);
-            });
+            // Auto-play video when ready
+            videoPlayer.onloadeddata = () => {
+                videoPlayer.play().catch(() => {});
+            };
         }
 
         // Update progress indicator
